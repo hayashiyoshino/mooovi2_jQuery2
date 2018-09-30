@@ -1,5 +1,7 @@
 $(function() {
 
+  var search_list = $(".listview.js-lazy-load-images");
+
   function appendProduct(product) {
     var html = `<li>
                   <a class="listview__element--right-icon" href="/products/${ product.id }/reviews/new" title="${ product.title }">
@@ -9,7 +11,7 @@ $(function() {
                     <div class="row no-space-button">
                       <div class="col2">
                         <div class="thumbnail thumbnail--movies">
-                          <div class="thubnail__figure" style="background-image: url(${ product.image });" title="${ product.title }"></div>
+                          <div class="thumbnail__figure" style="background-image: url(${ product.image });" title="${ product.title }"></div>
                         </div>
                       </div>
                       <div class="col6 push6">
@@ -23,6 +25,14 @@ $(function() {
                         </div>
                       </a>
                     </li>`
+      search_list.append(html);
+  }
+
+  function appendNoProduct(product) {
+    var html = `<li>
+                  <div class='listview__element--right-icon'>${ product }</div>
+                  </li>`
+    search_list.append(html);
   }
 
   $(".search__query").on("keyup", function() {
@@ -60,6 +70,9 @@ $(function() {
         appendNoProduct("一致する映画はありません");
         // それ以外の場合(取得したproductsが０の時)関数実行
       }
+    })
+    .fail(function() {
+      alert('映画検索に失敗しました')
     })
   });
 });
