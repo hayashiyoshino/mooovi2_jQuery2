@@ -20,5 +20,6 @@ class ProductsController < RankingController
       format.html
       format.json
     end
+    # アクションの中でHTMLとJSONなどのフォーマットごとに条件分岐する記述を追加
   end
 end
